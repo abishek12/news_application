@@ -5,7 +5,6 @@ import nodemailer from "nodemailer";
 
 // Import Model
 import { User } from "../../users/model/UserModel.js";
-import { Refer } from "../../users/model/ReferModel.js";
 
 export const registerUserController = async (req, res) => {
   try {
@@ -18,7 +17,6 @@ export const registerUserController = async (req, res) => {
         .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
         .min(8)
         .required(),
-      referralCode: Joi.string().allow(""),
       role: Joi.string()
         .valid("Customer", "Seller", "Admin")
         .default("Customer"),
@@ -34,10 +32,9 @@ export const registerUserController = async (req, res) => {
 
     // any error does not occur than; process for login
     let { firstName, lastName, email, password, role } = req.body;
-    let referralCode = req.query.ref;
 
     // if role is empty or not provided
-    if (!role) role = "Customer";
+    if (!role) role = "Subscriber";
 
     // encrypt password
     let salt = bcrypt.genSaltSync(10);

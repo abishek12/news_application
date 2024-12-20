@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       requried: true,
-      default: "Customer",
+      default: "Subscriber",
     },
     points: { type: Number, default: 0 },
   },

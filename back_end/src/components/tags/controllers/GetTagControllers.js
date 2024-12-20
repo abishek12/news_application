@@ -1,12 +1,12 @@
-import { Refer } from "../model/ReferModel.js";
+import { Tag } from "../model/TagModel.js";
 
-export const fetchReferalCode = async (req, res) => {
+export const getTagController = async (req, res) => {
   try {
-    let items = await Refer.find().populate("user");
+    let items = await Tag.find();
 
     return res.status(200).json({
       status: 200,
-      message: "Item Success",
+      message: "Items successfully",
       items,
     });
   } catch (error) {

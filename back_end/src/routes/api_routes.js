@@ -12,4 +12,10 @@ router.use("/users", userRoute);
 import authRoute from "../components/authentication/routes/AuthRoutes.js";
 router.use("/auth", authRoute);
 
+import postRoute from "../components/posts/routes/PostRoute.js";
+router.use("/posts", postRoute);
+
+import tagRoute from "../components/tags/routes/TagRoute.js";
+router.use("/tags", tagRoute);
+
 export default router;
