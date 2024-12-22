@@ -13,7 +13,6 @@ let postSchema = new mongoose.Schema(
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: "category",
     },
     tags: [

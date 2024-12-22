@@ -15,6 +15,9 @@ router.use("/auth", authRoute);
 import postRoute from "../components/posts/routes/PostRoute.js";
 router.use("/posts", postRoute);
 
+import categoryRoute from "../components/category/routes/CategoryRoute.js";
+router.use("/category", categoryRoute);
+
 import tagRoute from "../components/tags/routes/TagRoute.js";
 router.use("/tags", tagRoute);
 
