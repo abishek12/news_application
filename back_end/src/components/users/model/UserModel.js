@@ -22,9 +22,9 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       requried: true,
-      default: "Subscriber",
+      default: "subscriber",
+      enum: ["admin", "editor", "subscriber"],
     },
-    points: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

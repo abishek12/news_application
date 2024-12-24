@@ -18,8 +18,8 @@ export const registerUserController = async (req, res) => {
         .min(8)
         .required(),
       role: Joi.string()
-        .valid("Customer", "Seller", "Admin")
-        .default("Customer"),
+        .valid("admin", "editor", "subscriber")
+        .default("subscriber"),
     });
 
     let { error } = schema.validate(req.body);
@@ -34,7 +34,7 @@ export const registerUserController = async (req, res) => {
     let { firstName, lastName, email, password, role } = req.body;
 
     // if role is empty or not provided
-    if (!role) role = "Subscriber";
+    if (!role) role = "subscriber";
 
     // encrypt password
     let salt = bcrypt.genSaltSync(10);
@@ -87,22 +87,6 @@ export const registerUserController = async (req, res) => {
       //     }
       // });
     });
-
-
-    // if user is registered from referal code.
-    if (referralCode) {
-      let referrer = await Referral.findOne({ referralCode });
-      if (referrer) {
-        // Add the referred user to the referrer's record
-        referrer.referredUsers.push({ user: value._id });
-        await referrer.save();
-
-        // Reward the referrer
-        const referrerUser = await User.findById(referrer.user);
-        referrerUser.points += process.env.REFER_POINTS; // Award points to the referrer
-        await referrerUser.save();
-      }
-    }
 
     // display message to user
     return res.status(201).json({

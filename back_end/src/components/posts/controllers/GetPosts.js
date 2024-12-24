@@ -9,9 +9,10 @@ export const getPosts = async (req, res) => {
   }
 };
 
-export const getPostById = async (req, res) => {
+export const getSinglePost = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id).populate(
+    let slugs = req.params.slugs;
+    const post = await Post.findOne({ slugs }).populate(
       "category tags author",
       "name"
     );

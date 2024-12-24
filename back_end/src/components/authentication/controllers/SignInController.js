@@ -46,7 +46,7 @@ export const loginUserController = async (req, res) => {
                 status: 403,
                 message: "Password did not matched"
             });
-
+ 
         let token = jwt.sign({
             exp: Math.floor(Date.now() / 1000) + (60 * 60),
             data: {
@@ -54,6 +54,7 @@ export const loginUserController = async (req, res) => {
                 first_name: userItem['firstName'],
                 last_name: userItem['lastName'],
                 email: userItem['email'],
+                role: userItem['role']
             },
         }, privateKey);
 
