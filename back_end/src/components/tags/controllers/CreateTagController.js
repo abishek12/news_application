@@ -12,6 +12,9 @@ export const createTagController = async (req, res) => {
       title: Joi.string().required(),
     });
 
+    // get author id from user object set from cookies request
+    let author = req.user.id;
+
     let { error } = schema.validate(req.body);
 
     if (error)
@@ -27,6 +30,7 @@ export const createTagController = async (req, res) => {
     let value = await Tag.create({
       title,
       slugs,
+      author,
     });
 
     // display success message

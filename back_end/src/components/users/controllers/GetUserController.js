@@ -45,8 +45,8 @@ export const getUsersController = async (req, res) => {
 export const getUserController = async (req, res) => {
   try {
     let userId = req.query.user_id;
-    let currentUser = req.user;
-    if (userId !== currentUser.id && !currentUser.role.includes("admin")) {
+    let {id, role} = req.user;
+    if (userId !== id && !role.includes("admin")) {
       return res.status(403).json({
         status: 403,
         message: "You are not authorized to view this user",

@@ -11,6 +11,11 @@ let tagSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+    required: true,
+  },
 });
 
 export let Tag = mongoose.model("tags", tagSchema, "tags");
