@@ -20,7 +20,7 @@ const NewsTop = ({ data }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {articles.map((article, index) => (
 
-         <Card article={article} index={index} />
+         <Card key={index} article={article} index={index}/>
         ))}
       </div>
     </div>

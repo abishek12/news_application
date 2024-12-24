@@ -1,12 +1,17 @@
-
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { IoLogInOutline } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
+
+// import { cookies } from "next/headers";
+import { getAuthStatus } from "../action";
+// import { create } from "../action";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false); // State to toggle menu visibility
   const [isScrolled, setIsScrolled] = useState(false); // State to track scroll position
-
+  const [isLoggenIn, setIsLoggenIn] = useState(false);
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -30,12 +35,19 @@ const Navbar = () => {
     };
   }, []);
 
+  // check login status
+  useEffect(() => {
+    const checkAuth = async () => {
+      const authStatus = await getAuthStatus();
+      setIsLoggenIn(authStatus);
+    };
+    checkAuth();
+  });
+
   return (
     <div
       className={`${
-        isScrolled
-          ? "fixed top-0 w-full z-10 bg-[#0450A4]"
-          : " bg-[#0450A4]"
+        isScrolled ? "fixed top-0 w-full z-10 bg-[#0450A4]" : " bg-[#0450A4]"
       } mx-auto text-white`}
     >
       {/* Top Navbar Container */}
@@ -91,6 +103,27 @@ const Navbar = () => {
         <Link href="/sampadika" className="hover:bg-[#0362C7] p-2 rounded">
           Sampadika
         </Link>
+        {isLoggenIn ? (
+          <Link
+            href="/profile"
+            className="flex items-center space-x-4 hover:bg-[#0362C7] p-2 rounded"
+          >
+            <CgProfile size={20} className="mr-2" />
+            Profile
+          </Link>
+        ) : (
+          <Link
+            href="/login"
+            className="flex items-center space-x-4 hover:bg-[#0362C7] p-2 rounded"
+          >
+            <IoLogInOutline size={20} className="mr-2" />
+            Login
+          </Link>
+        )}
+        {/* <Link href="/login" className="flex items-center space-x-4 hover:bg-[#0362C7] p-2 rounded">
+        <IoLogInOutline size={20} className="mr-2"/>
+        Login
+        </Link> */}
       </div>
     </div>
   );
