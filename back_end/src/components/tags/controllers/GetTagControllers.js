@@ -2,7 +2,7 @@ import { Tag } from "../model/TagModel.js";
 
 export const getTagController = async (req, res) => {
   try {
-    let items = await Tag.find();
+    let items = await Tag.find().populate("author", "firstName lastName");
 
     return res.status(200).json({
       status: 200,
