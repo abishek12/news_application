@@ -19,7 +19,10 @@ app.use(express.urlencoded({extended:false}))
 // use of middleware
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+  credentials: true,
+  origin: true,
+}))
 app.options("*",cors);
 
 // secret file

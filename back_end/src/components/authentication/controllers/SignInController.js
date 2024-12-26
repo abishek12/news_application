@@ -61,8 +61,9 @@ export const loginUserController = async (req, res) => {
         // set cookies in users browser
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
+            secure: process.env.NODE_ENV === "production" ? true : false,
             sameSite: "Strict",
+            path: "/"
         });
 
         return res.status(200).json({

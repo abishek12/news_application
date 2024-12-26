@@ -118,6 +118,7 @@ const AuthPage = () => {
               headers: {
                 "Content-Type": "application/json",
               },
+              credentials: "include",
               body: JSON.stringify({
                 email: loginForm.email,
                 password: loginForm.password,
@@ -133,7 +134,7 @@ const AuthPage = () => {
           if (response.ok) {
             console.log("Login successful:", data);
             alert(data.message || "Logged In successfully!");
-            create(data.token);
+            // create(data.token);
             router.push('/')
           } else {
             console.error("Login failed:", data);

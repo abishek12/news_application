@@ -105,7 +105,7 @@ const Navbar = () => {
         </Link>
         {isLoggenIn ? (
           <Link
-            href="/profile"
+            href="/account"
             className="flex items-center space-x-4 hover:bg-[#0362C7] p-2 rounded"
           >
             <CgProfile size={20} className="mr-2" />
