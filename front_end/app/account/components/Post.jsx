@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import "dotenv";
 import slug from "slug";
 import { jwtDecode } from "jwt-decode";
-import { getToken } from "../action";
 import Fuse from "fuse.js";
+import getToken from ''
 
 const Post = () => {
   const [formData, setFormData] = useState({
@@ -192,7 +192,7 @@ const Post = () => {
 
   return (
     <>
-      <div className="max-w-2xl mx-auto p-6 bg-blue-200 rounded-md">
+      <div className="max-w-2xl mx-auto p-6 bg-blue-200 rounded-md m-2">
         <h1 className="flex items-center justify-center text-lg ">New Post</h1>
         <form className="space-y-6" onSubmit={(e) => handleSubmit(e)}>
           <div className="mb-5">
@@ -239,7 +239,7 @@ const Post = () => {
           </div>
 
           {/**Tags */}
-          {/* <div>
+          <div>
             <label
               htmlFor="tags"
               className="block text-sm font-medium text-gray-700"
@@ -289,9 +289,11 @@ const Post = () => {
                 );
               })}
             </div>
-          </div> */}
+          </div>
 
-          <div>
+
+          {/* Tags */}
+          {/* <div>
             <label
               htmlFor="tags"
               className="block text-sm font-medium text-gray-700"
@@ -312,10 +314,10 @@ const Post = () => {
                   {tag.title}
                 </option>
               ))}
-            </select>
+            </select> */}
 
             {/*Selected Tags*/}
-            <div className="mt-3 flex flex-wrap gap-2">
+            {/* <div className="mt-3 flex flex-wrap gap-2">
               {formData.tags.map((tagId, index) => {
                 const selectedTag = tagOptions.find((tag) => tag._id === tagId);
 
@@ -338,7 +340,7 @@ const Post = () => {
                 );
               })}
             </div>
-          </div>
+          </div> */}
 
           {/*Images */}
           <div>

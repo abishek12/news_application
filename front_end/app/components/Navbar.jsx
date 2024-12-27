@@ -2,16 +2,21 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { IoLogInOutline } from "react-icons/io5";
+import { IoLogOutOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
+import { MdLogout } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 // import { cookies } from "next/headers";
-import { getAuthStatus } from "../action";
+import { getAuthStatus, logout } from "../action";
 // import { create } from "../action";
 
 const Navbar = () => {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false); // State to toggle menu visibility
   const [isScrolled, setIsScrolled] = useState(false); // State to track scroll position
   const [isLoggenIn, setIsLoggenIn] = useState(false);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -104,19 +109,32 @@ const Navbar = () => {
           Sampadika
         </Link>
         {isLoggenIn ? (
-          <Link
-            href="/account"
-            className="flex items-center space-x-4 hover:bg-[#0362C7] p-2 rounded"
-          >
-            <CgProfile size={20} className="mr-2" />
-            Profile
-          </Link>
+          <div className="flex flex-row">
+            <Link
+              href="/account"
+              className="flex items-center space-x-4 hover:bg-[#0362C7] p-2 rounded"
+            >
+              <CgProfile size={20} className="mr-2" />
+              Profile
+            </Link>
+            <button
+              type="button"
+              className="flex items-center space-x-4 hover:bg-[#0362C7] p-2 rounded"
+              onClick={async () => {
+                await logout();
+                router.push("/");
+              }}
+            >
+              <MdLogout size={20} className="mr-2" />
+              Logout
+            </button>
+          </div>
         ) : (
           <Link
             href="/login"
             className="flex items-center space-x-4 hover:bg-[#0362C7] p-2 rounded"
           >
-            <IoLogInOutline size={20} className="mr-2" />
+            <IoLogInOutline size={20} className="" />
             Login
           </Link>
         )}

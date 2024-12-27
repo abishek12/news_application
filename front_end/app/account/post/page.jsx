@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import "dotenv";
 import slug from "slug";
 import { jwtDecode } from "jwt-decode";
-import { getToken } from "../action";
 import Fuse from "fuse.js";
+import { getToken } from "../../action";
 
 const Post = () => {
   const [formData, setFormData] = useState({
@@ -192,7 +192,7 @@ const Post = () => {
 
   return (
     <>
-      <div className="max-w-2xl mx-auto p-6 bg-blue-200 rounded-md">
+      <div className="max-w-2xl mx-auto p-6 bg-blue-200 rounded-md m-5">
         <h1 className="flex items-center justify-center text-lg ">New Post</h1>
         <form className="space-y-6" onSubmit={(e) => handleSubmit(e)}>
           <div className="mb-5">
@@ -239,7 +239,8 @@ const Post = () => {
           </div>
 
           {/**Tags */}
-          {/* <div>
+          {/*This tag for typing and search matching*/}
+          <div>
             <label
               htmlFor="tags"
               className="block text-sm font-medium text-gray-700"
@@ -266,59 +267,10 @@ const Post = () => {
                 ))}
               </ul>
             )}
-            
+
             <div className="mt-3 flex flex-wrap gap-2">
               {formData.tags.map((tagId, index) => {
                 const selectedTag = tagOptions.find((tag) => tag._id === tagId);
-                return (
-                  <div
-                    key={index}
-                    className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full flex items-center"
-                  >
-                    <span className="mr-2">
-                      {selectedTag?.title || "Unknown Tag"}
-                    </span>
-                    <button
-                      type="button"
-                      className="text-red-500 hover:text-red-700"
-                      onClick={() => removeTag(tagId)}
-                    >
-                      &times;
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-          </div> */}
-
-          <div>
-            <label
-              htmlFor="tags"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Tags
-            </label>
-            <select
-              name="tags"
-              value=""
-              onChange={handleTagChange}
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-            >
-              <option value="" disabled>
-                Select tags
-              </option>
-              {tagOptions.map((tag, index) => (
-                <option value={tag._id} key={index}>
-                  {tag.title}
-                </option>
-              ))}
-            </select>
-
-            {/*Selected Tags*/}
-            <div className="mt-3 flex flex-wrap gap-2">
-              {formData.tags.map((tagId, index) => {
-                const selectedTag = tagOptions.find((tag) => tag._id === tagId);
-
                 return (
                   <div
                     key={index}
@@ -339,6 +291,56 @@ const Post = () => {
               })}
             </div>
           </div>
+
+          {/*This tag for option selecting */}
+          {/* <div>
+            <label
+              htmlFor="tags"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Tags
+            </label>
+            <select
+              name="tags"
+              value=""
+              onChange={handleTagChange}
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            >
+              <option value="" disabled>
+                Select tags
+              </option>
+              {tagOptions.map((tag, index) => (
+                <option value={tag._id} key={index}>
+                  {tag.title}
+                </option>
+              ))}
+            </select> */}
+
+          {/*Selected Tags*/}
+          {/* <div className="mt-3 flex flex-wrap gap-2">
+              {formData.tags.map((tagId, index) => {
+                const selectedTag = tagOptions.find((tag) => tag._id === tagId);
+
+                return (
+                  <div
+                    key={index}
+                    className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full flex items-center"
+                  >
+                    <span className="mr-2">
+                      {selectedTag?.title || "Unknown Tag"}
+                    </span>
+                    <button
+                      type="button"
+                      className="text-red-500 hover:text-red-700"
+                      onClick={() => removeTag(tagId)}
+                    >
+                      &times;
+                    </button>
+                  </div>
+                );
+              })}
+            </div> */}
+          {/* </div> */}
 
           {/*Images */}
           <div>
@@ -397,10 +399,10 @@ const Post = () => {
                   type="radio"
                   name="status"
                   value="draft"
-                  // checked={formData.status === "draft"}
+                  checked={formData.status === "draft"}
                   onChange={handleChange}
                   className="form-radio h-4 w-4 text-blue-600"
-                  defaultChecked
+                  //   defaultChecked
                 />
                 <span className="ml-2">Draft</span>
               </label>
@@ -429,10 +431,10 @@ const Post = () => {
                   type="radio"
                   name="visibility"
                   value="public"
-                  // checked={formData.visibility === "public"}
+                  checked={formData.visibility === "public"}
                   onChange={handleChange}
                   className="form-radio h-4 w-4 text-blue-600"
-                  defaultChecked
+                  //   defaultChecked
                 />
                 <span className="ml-2">Public</span>
               </label>
