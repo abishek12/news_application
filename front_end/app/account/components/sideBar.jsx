@@ -43,7 +43,7 @@ const SideBar = () => {
         // state to control width and visibility
         className={`bg-gray-700 text-white 
                    h-screen transition-all 
-                  duration-300  fixed
+                  duration-300  fixed z-10
                   ${isOpen ? "w-64" : "w-0 overflow-hidden"}`}
       >
         {/* Sidebar content */}
@@ -91,12 +91,12 @@ const SideBar = () => {
                   </Link>
                 </li>
                 <li className="border-b border-gray-300 p-2">
-                  <a
-                    href="/search?sort=price-high-to-low"
+                  <Link
+                    href="/account/article"
                     className="hover:underline"
                   >
                     Articles
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </details>

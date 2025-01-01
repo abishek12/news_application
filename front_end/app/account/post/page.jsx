@@ -6,6 +6,12 @@ import slug from "slug";
 import { jwtDecode } from "jwt-decode";
 import Fuse from "fuse.js";
 import { getToken } from "../../action";
+// import { Editor } from "@tinymce/tinymce-react";
+import dynamic from "next/dynamic";
+
+const TinyMCEEditor = dynamic(() => import("../components/TinyMCE"), {
+  ssr: false,
+});
 
 const Post = () => {
   const [formData, setFormData] = useState({
@@ -115,6 +121,14 @@ const Post = () => {
       // Automatically generate slug when title changes
       ...(name === "title" ? { slugs: slug(value) } : {}),
     }));
+  };
+
+  const handleEditorChange = (content) => {
+    setFormData((formData) => ({
+      ...formData,
+      content,
+    }));
+    console.log(content);
   };
 
   const handleTagChange = (e) => {
@@ -375,7 +389,7 @@ const Post = () => {
           </div>
 
           {/* Content */}
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium text-gray-700">
               Content
             </label>
@@ -385,6 +399,21 @@ const Post = () => {
               onChange={handleChange}
               rows={3}
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            />
+          </div> */}
+
+          {/*Content with TinyMCE */}
+          <div>
+            <label
+              htmlFor="content"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Content
+            </label>
+            <TinyMCEEditor
+              onEditorChange={handleEditorChange}
+              height={500}
+              width={620}
             />
           </div>
 
